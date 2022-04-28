@@ -81,8 +81,8 @@ DATABASES = {
         'NAME': 'monitoring',
         'USER': 'postgres',
         'PASSWORD': '123456',
-        'HOST': '',
-        'PORT': 'db_port_number',
+        'HOST': '127.0.0.1',
+        'PORT': '5432'
     }
 }
 
