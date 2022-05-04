@@ -44,8 +44,8 @@ INSTALLED_APPS = [
     'constance.backends.database',
     'constance',
 
-    #'monitoring.apps.MonitoringConfig',
-    'monitoring',
+    'monitoring.apps.MonitoringConfig',
+    #'monitoring',
 
 
 ]
@@ -75,9 +75,9 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.request',
                 'django.contrib.messages.context_processors.messages',
             ],
         },
@@ -137,8 +137,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATIC_DIRS = (os.path.join(BASE_DIR, 'static'),)
+STATIC_ROOT = os.path.join(BASE_DIR, 'monitoring/static')
+STATIC_DIRS = (os.path.join(BASE_DIR, 'monitoring/static'),)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

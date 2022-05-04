@@ -4,6 +4,7 @@ from django.views.generic import ListView, DetailView, UpdateView, CreateView, D
 from .models import Vulnerability
 from django.urls import reverse_lazy
 from django.shortcuts import render, HttpResponseRedirect
+from .forms import CreateAdForm
 
 
 def home_page(request):
@@ -28,38 +29,40 @@ class AdsDetailView(DetailView):
     context_object_name = 'ad'
 
 
-class AdCreateView(CreateView):
-    model = Vulnerability
-    fields = '__all__'
-    template = 'monitoring/ads_form.html'
-    redirect_field_name = 'ads_list'
-    success_url = reverse_lazy('ads_list')
-
-
 # class AdCreateView(CreateView):
 #     model = Vulnerability
 #     fields = '__all__'
 #     template = 'ads_form.html'
 #     redirect_field_name = 'ads_list'
 #     success_url = reverse_lazy('ads_list')
-#
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         return context
-#
-#     def post(self, request, *args, **kwargs):
-#         self.object = None
-#         form = self.get_form()
-#         if form.is_valid():
-#             self.object = form.save()
-#             return HttpResponseRedirect(self.get_success_url())
-#         else:
-#             return self.form_invalid(form)
+
+
+class AdCreateView(CreateView):
+    template_name = 'monitoring/ads_form.html'
+    # form_class = CreateAdForm
+    model = Vulnerability
+    fields = [
+        'name', 'title', 'text', 'date'
+    ]
+
+    redirect_field_name = 'ads_list'
+    success_url = reverse_lazy('ads_list')
 
 
 class AdEditView(UpdateView):
+    template_name = 'monitoring/ads_form.html'
     model = Vulnerability
-    fields = '__all__'
-    template = 'monitoring/ads_form.html'
+    fields = [
+        'name', 'title', 'text', 'date'
+    ]
     redirect_field_name = 'ads_list'
     success_url = reverse_lazy('ads_list')
+
+# class AdEditView(CreateView):
+#     template_name = 'monitoring/ads_form.html'
+#     form_class = CreateAdForm
+#     # model = Vulnerability
+#     # fields = '__all__'
+#
+#     redirect_field_name = 'ads_list'
+#     success_url = reverse_lazy('ads_list')
