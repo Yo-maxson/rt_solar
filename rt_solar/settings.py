@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,7 +44,8 @@ INSTALLED_APPS = [
     'constance.backends.database',
     'constance',
 
-    'monitoring.apps.MonitoringConfig',
+    #'monitoring.apps.MonitoringConfig',
+    'monitoring',
 
 
 ]
@@ -69,8 +71,7 @@ ROOT_URLCONF = 'rt_solar.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'monitoring/templates']
-        ,
+        'DIRS': os.path.join(BASE_DIR, 'monitoring/templates'),
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
