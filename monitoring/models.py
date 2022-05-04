@@ -4,11 +4,12 @@ from django.utils import timezone
 
 
 class Vulnerability(models.Model):
-    name = models.CharField(unique=True, max_length=200, default="")
-    title = models.CharField(max_length=100)
+    name = models.CharField(unique=True, max_length=200, default="") # Уязвимость
+    title = models.CharField(max_length=100) # Наименование продукта
     text = models.TextField()
     date = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    exploit = models.BooleanField(default=True)
     relevance = models.BooleanField(default=True)
 
     class Meta:

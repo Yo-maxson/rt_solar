@@ -1,0 +1,33 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <!-- Обязательные метатеги -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" >
+
+    <title>
+
+        {{ title }}
+
+  </title>
+</head>
+
+<body>
+  {% include 'main/includes/header.html' %}
+  <h1> Название: {{ad.title }} </h1>
+  <h5> Уязвимость: {{ad.name }} </h5>
+  <h5> Описание: {{ad.text }} </h5>
+  <h5> Дата: {{ad.date }} </h5>
+  <h5> Автор: {{ad.author }} </h5>
+  <h5> Эксплойт в сеть: {{ad.exploit }} </h5>
+
+
+    {% include 'main/includes/footer.html' %}
+
+    <!-- Bootstrap JS -->
+    <script defer src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
