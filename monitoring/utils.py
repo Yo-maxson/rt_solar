@@ -1,11 +1,16 @@
-from django.conf import settings
 from datetime import datetime
+
 import psycopg2
+from django.conf import settings
 
 
 def get_file():
     file_name = str(datetime.now()) + '.csv'
-    query = "SELECT * FROM monitoring_vulnerability;"
+    query = '''
+        COPY (
+        SELECT * FROM monitoring_vulnerability
+        ) TO stdout WITH CSV DELIMITER \';\' HEADER;
+    '''
     db_host = settings.DATABASES['default']['HOST']
     db_name = settings.DATABASES['default']['NAME']
     db_user = settings.DATABASES['default']['USER']
@@ -18,5 +23,3 @@ def get_file():
         con.close()
 
     return file_name
-
-

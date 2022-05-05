@@ -1,15 +1,13 @@
-from django.shortcuts import render
 from constance import config
-from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
-from .models import Vulnerability
-from django.urls import reverse_lazy
-from django.shortcuts import render, redirect
-from .forms import CreateAdForm
+from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
-from .utils import get_file
-from django.conf import settings
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
 
+from .models import Vulnerability
+from .utils import get_file
 
 
 def home_page(request):
@@ -77,6 +75,7 @@ class AdDeleteView(LoginRequiredMixin, DeleteView):
         if self.request.user != obj.author:
             raise PermissionDenied()
         return obj
+
 
 def generate_csv(request):
     file_name = get_file()
