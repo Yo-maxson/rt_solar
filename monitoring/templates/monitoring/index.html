@@ -2,28 +2,28 @@
 
 
 {% block title %}
-  {{ title }}
+{{ title }}
 {% endblock title %}
 
 
-    {% block content %}
+{% block content %}
 
-      {% if turn_on_block %}
+{% if turn_on_block %}
 
-        <div style='text-align: center; margin-top: 80px; font-size: 60px; color: red; face: Times New Roman;';>
-            <h1> Главная страница </h1>
-                Абракадабра, работай!
+<div style='text-align: center; margin-top: 80px; font-size: 60px; color: red; face: Times New Roman;' ;>
+    <h1> Главная страница </h1>
+    Абракадабра, работай!
 
 
-        </div>
+</div>
 
-      {% else %}
+{% else %}
 
-        <div style='text-align: center; margin-top: 80px; font-size: 16px;';>
+<div style='text-align: center; margin-top: 80px; font-size: 16px;' ;>
 
-            На сайте проводятся технические работы!
+    На сайте проводятся технические работы!
 
-       </div>
-      {% endif %}
+</div>
+{% endif %}
 
-    {% endblock %}
+{% endblock %}

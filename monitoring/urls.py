@@ -1,4 +1,5 @@
-from django.urls import path, include
+from django.urls import path
+
 from . import views
 
 app_name = 'monitoring'
@@ -10,4 +11,4 @@ urlpatterns = [
     path('ads/<int:pk>/edit/', views.AdEditView.as_view(), name='ad_edit'),
     path('ads/<int:pk>/delete/', views.AdDeleteView.as_view(), name='ad_del'),
     path('get_csv/', views.generate_csv, name='get_csv'),
-              ]
+]

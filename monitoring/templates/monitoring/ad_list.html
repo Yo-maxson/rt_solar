@@ -2,78 +2,54 @@
 
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
+<head>
     <!-- Обязательные метатеги -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" >
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
 
     <title>
 
         {{ title }}
 
-  </title>
-  <style type="text/css">
-
-     }
-    }
-
-    body {
-      display: flex;
-    }
-    .left {
-      flex: 1 1 75%;
+    </title>
 
 
-    }
-    .right {
-      flex: 0 0 25%;
-    }
-
-    .line{
-
-      border-bottom: 3px solid maroon; /* Параметры линии под текстом */
-      font-weight: normal; /* Убираем жирное начертание */
-      padding-bottom: 2px; /* Расстояние от текста до линии */
-      color: black;
-
-    }
-
-   </style>
+    </style>
 </head>
 
 <body>
-  {% include 'monitoring/includes/header.html' %}
+{% include 'monitoring/includes/header.html' %}
 
-  <div class="left">
+<div class="left">
     <table>
-      <tr>
+        <tr>
 
-        <td><h5>#</h5></td>
+            <td><h5>#</h5></td>
 
-        <div class='line'>
-          <td><h5>Продукт</h5></td>
-        </div>
-        <td><h5>Уязвимость</h5></td>
-      </div>
-      </tr>
+            <div class='line'>
+                <td><h5>Продукт</h5></td>
+            </div>
+            <td><h5>Уязвимость</h5></td>
 
-      {% for ad in ads_list %}
-    </div>
-      <tr>
-        <td><h5> {{ ad.pk }}</h5></td>
-        <td><h5><a href={{ ad.pk }}> {{ ad.title }}</a> </h5></td>
-        <td><h5>{{ ad.name }}</h5></td>
-      </tr>
+        </tr>
 
-      {% endfor %}
+        {% for ad in ads_list %}
+
+        <tr>
+            <td><h5> {{ ad.pk }}</h5></td>
+            <td><h5><a href={{ ad.pk }}> {{ ad.title }}</a></h5></td>
+            <td><h5>{{ ad.name }}</h5></td>
+        </tr>
+
+        {% endfor %}
     </table>
-  </div>
+</div>
 
 
-      <div class="pagination">
-            <h6>
+<div class="pagination">
+    <h6>
             <span class="step-links">
                 {% if page_obj.has_previous %}
                     <a href="?page=1">&laquo; Первая</a>
@@ -92,10 +68,10 @@
                 {% endif %}
             </span>
 
-          </h6>
-          </div>
-    {% include 'monitoring/includes/footer.html' %}
+    </h6>
+</div>
+{% include 'monitoring/includes/footer.html' %}
 
-    <!-- Bootstrap JS -->
-    <script defer src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+<!-- Bootstrap JS -->
+<script defer src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 </body>
