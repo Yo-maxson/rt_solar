@@ -21,7 +21,8 @@
         <div style='text-align: center; color: white; face: Times New Roman; text-indent: 8px; margin-top: 4px ';>
         {% if user.is_authenticated %}
             <h5><a>{{ user.get_username }}</a></h5>
-            <a href="{% url 'logout' %}">Выйти</a>
+            <a href="{% url 'monitoring:get_csv' %}" class="btn btn-primary">Скачать</a>
+            <a href="{% url 'logout' %}" class="btn btn-danger">Выйти</a>
 
         {% else %}
 
