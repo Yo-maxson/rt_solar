@@ -1,3 +1,83 @@
-from django.shortcuts import render
+from constance import config
+from django.conf import settings
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
 
-# Create your views here.
+from .models import Vulnerability
+from .utils import get_file
+
+
+def home_page(request):
+    main_temp = {'title': 'Главная страница', 'turn_on_block': config.MAINTENANCE_MODE, }
+    return render(request, 'monitoring/index.html', context=main_temp)
+
+
+class AdsListView(ListView):
+    paginate_by = 2
+    model = Vulnerability
+    template_name = 'monitoring/ad_list.html'
+    context_object_name = 'ads_list'
+    title_ads = {'title': 'Все объявления'}
+
+    def get_queryset(self):
+        return Vulnerability.objects.filter(relevance=True).order_by('date')
+
+
+class AdsDetailView(DetailView):
+    model = Vulnerability
+    template_name = 'monitoring/ad_detail.html'
+    context_object_name = 'ad'
+
+
+class AdCreateView(LoginRequiredMixin, CreateView):
+    template_name = 'monitoring/ads_form.html'
+    # form_class = CreateAdForm
+    model = Vulnerability
+    fields = [
+        'name', 'title', 'text', 'date'
+    ]
+
+    success_url = reverse_lazy('monitoring:ads_list')
+
+    def form_valid(self, form):
+        obj = form.save(commit=False)
+        obj.author = self.request.user
+        obj.save()
+        return super().form_valid(form)
+
+
+class AdEditView(LoginRequiredMixin, UpdateView):
+    template_name = 'monitoring/ads_form.html'
+    model = Vulnerability
+    fields = [
+        'name', 'title', 'text', 'date'
+    ]
+
+    success_url = reverse_lazy('monitoring:ads_list')
+
+    def get_object(self, queryset=None):
+        obj = super().get_object()
+        if self.request.user != obj.author:
+            raise PermissionDenied()
+        return obj
+
+
+class AdDeleteView(LoginRequiredMixin, DeleteView):
+    model = Vulnerability
+    success_url = reverse_lazy('monitoring:ads_list')
+    template_name = 'monitoring/ad_confirm_delete.html'
+
+    def get_object(self, queryset=None):
+        obj = super().get_object()
+        if self.request.user != obj.author:
+            raise PermissionDenied()
+        return obj
+
+
+def generate_csv(request):
+    file_name = get_file()
+    url = settings.MEDIA_URL + '/' + file_name
+    return redirect(url)

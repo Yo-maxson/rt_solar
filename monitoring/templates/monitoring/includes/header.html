@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+    <a class="navbar-brand" href="/monitoring/static">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto mb-2 mb-md-2">
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Главная</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/ads/">Объявления</a>
+        </li>
+            <a href="{% url 'monitoring:ad_create' %}" class="btn btn-primary">Создать</a>
+
+
+        </ul>
+        <form class="d-flex">
+
+        <div style='text-align: center; color: white; face: Times New Roman; text-indent: 8px; margin-top: 4px ';>
+        {% if user.is_authenticated %}
+            <h5><a>{{ user.get_username }}</a></h5>
+            <a href="{% url 'monitoring:get_csv' %}" class="btn btn-primary">Скачать</a>
+            <a href="{% url 'logout' %}" class="btn btn-danger">Выйти</a>
+
+        {% else %}
+
+            <h6> Anonim </h6>
+            <a href="{% url 'login' %}">Войти</a>
+
+        {% endif %}
+
+        </div>
+        </form>
+
+
+
+
+    </div>
+    </div>
+</nav>
