@@ -25,9 +25,10 @@
   <h5> Автор: {{ad.author }} </h5>
   <h5> Эксплойт в сеть: {{ad.exploit }} </h5>
 
-  <form action='edit/'>
-      <button type="submit">  Edit Ad</button>
-  </form>
+
+  <a href="{% url 'monitoring:ad_edit' ad.id %}" class="btn btn-primary">Изменить</a>
+  <a href="{% url 'monitoring:ad_del' ad.id %}" class="btn btn-danger">Удалить</a>
+
     {% include 'monitoring/includes/footer.html' %}
 
     <!-- Bootstrap JS -->

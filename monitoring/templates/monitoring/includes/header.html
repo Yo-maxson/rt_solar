@@ -7,31 +7,33 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto mb-2 mb-md-2">
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/monitoring/static">Главная</a>
+            <a class="nav-link active" aria-current="page" href="/">Главная</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/ads/">Объявления</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link disabled" href="/monitoring/static" tabindex="-1" aria-disabled="true">Disabled</a>
-        </li>
+            <a href="{% url 'monitoring:ad_create' %}" class="btn btn-primary">Создать</a>
+
 
         </ul>
         <form class="d-flex">
 
         <div style='text-align: center; color: white; face: Times New Roman; text-indent: 8px; margin-top: 4px ';>
-            {% if user.is_authenticated %}
-            <h5>{{ user.get_username }}</h5>
-            {% else %}
-            <h5> anonim </h5>
-            {% endif %}
+        {% if user.is_authenticated %}
+            <h5><a>{{ user.get_username }}</a></h5>
+            <a href="{% url 'logout' %}">Выйти</a>
+
+        {% else %}
+
+            <h6> Anonim </h6>
+            <a href="{% url 'login' %}">Войти</a>
+
+        {% endif %}
 
         </div>
         </form>
 
-        <form action='add/'>
-            <button type="submit">  Create Ad</button>
-        </form>
+
 
 
     </div>
